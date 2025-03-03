@@ -5,21 +5,19 @@ use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
-    return redirect()->route('college.index');
+    return redirect()->route('colleges.index');
 });
 
-// College Routes (Singular)
-Route::get('/college', [CollegeController::class, 'index'])->name('college.index');
-Route::get('/college/create', [CollegeController::class, 'create'])->name('college.create');
-Route::post('/college', [CollegeController::class, 'store'])->name('college.store');
-Route::get('/college/{id}/edit', [CollegeController::class, 'edit'])->name('college.edit');
-Route::put('/college/{id}', [CollegeController::class, 'update'])->name('college.update');
-Route::delete('/college/{id}', [CollegeController::class, 'destroy'])->name('college.destroy');
+Route::get('/colleges', [CollegeController::class, 'index'])->name('colleges.index');
+Route::get('/colleges/create', [CollegeController::class, 'create'])->name('colleges.create');
+Route::post('/colleges', [CollegeController::class, 'store'])->name('colleges.store');
+Route::get('/colleges/{id}/edit', [CollegeController::class, 'edit'])->name('colleges.edit');
+Route::put('/colleges/{id}', [CollegeController::class, 'update'])->name('colleges.update');
+Route::delete('/colleges/{id}', [CollegeController::class, 'destroy'])->name('colleges.destroy');
 
-// Student Routes (Singular)
-Route::get('/student', [StudentController::class, 'index'])->name('student.index');
-Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
-Route::post('/student', [StudentController::class, 'store'])->name('student.store');
-Route::get('/student/{id}/edit', [StudentController::class, 'edit'])->name('student.edit');
-Route::put('/student/{id}', [StudentController::class, 'update'])->name('student.update');
-Route::delete('/student/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+Route::post('/students', [StudentController::class, 'store'])->name('students.store');
+Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
+Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
+Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');

@@ -71,7 +71,7 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email,' . $student->id,
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|string|max:8',
             'dob' => 'required|date',
             'college_id' => 'required|exists:colleges,id',
         ]);

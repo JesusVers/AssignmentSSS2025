@@ -30,8 +30,8 @@ class CollegeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:colleges,name',
-            'address' => 'required|string|max:255',
+            'name' => 'required|string|max:55|unique:colleges,name',
+            'address' => 'required|string|max:55',
         ]);
 
         College::create($request->all());
@@ -63,8 +63,8 @@ class CollegeController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:colleges,name,' . $id,
-            'address' => 'required|string|max:255',
+            'name' => 'required|string|max:55|unique:colleges,name,' . $id,
+            'address' => 'required|string|max:55',
         ]);
 
         $college = College::findOrFail($id);

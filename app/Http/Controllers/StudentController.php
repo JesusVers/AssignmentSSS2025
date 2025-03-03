@@ -35,7 +35,7 @@ class StudentController extends Controller
     {
         // ✅ Validate input
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:55',
             'email' => 'required|email|unique:students,email',
             'phone' => 'required|digits:8',
             'dob' => 'required|date',
@@ -69,7 +69,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:55',
             'email' => 'required|email|unique:students,email,' . $student->id,
             'phone' => 'required|string|max:8',
             'dob' => 'required|date',

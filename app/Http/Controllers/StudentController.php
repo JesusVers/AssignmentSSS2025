@@ -8,16 +8,19 @@ use App\Models\College;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of students.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::with('college')->get();
-        $colleges = College::all(); // ✅ Fetch all colleges
-
-        return view('students.index', compact('students', 'colleges')); // ✅ Pass $colleges to the view
-    }
+        $colleges = College::all(); // Get all colleges for the dropdown
+        $query = Student::query(); // Start with a base query
+    
+        if ($request->has('college_id') && $request->college_id != '') {
+            $query->where('college_id', $request->college_id);
+        }
+    
+        $students = $query->with('college')->get(); // Fetch filtered students
+    
+        return view('students.index', compact('students', 'colleges'));
+    }    
 
     /**
      * Show the form for creating a new student.

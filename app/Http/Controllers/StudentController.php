@@ -8,19 +8,26 @@ use App\Models\College;
 
 class StudentController extends Controller
 {
+
     public function index(Request $request)
     {
         $colleges = College::all(); // Get all colleges for the dropdown
-        $query = Student::query(); // Start with a base query
-    
+        $query = Student::query()->with('college'); // Start query with eager loading
+
+        // Filtering by college
         if ($request->has('college_id') && $request->college_id != '') {
             $query->where('college_id', $request->college_id);
         }
-    
-        $students = $query->with('college')->get(); // Fetch filtered students
-    
-        return view('students.index', compact('students', 'colleges'));
-    }    
+
+        // Sorting logic
+        $sortOrder = $request->input('sort', 'asc'); // Default to ascending
+        $query->orderBy('name', $sortOrder);
+
+        $students = $query->get(); // Fetch filtered & sorted students
+
+        return view('students.index', compact('students', 'colleges', 'sortOrder'));
+    }
+
 
     /**
      * Show the form for creating a new student.

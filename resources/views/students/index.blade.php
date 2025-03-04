@@ -34,7 +34,20 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>Name</th>
+                        <th>
+                            <a href="{{ route('students.index', [
+                                    'college_id' => request('college_id'), 
+                                    'sort' => request('sort') == 'asc' ? 'desc' : 'asc'
+                                ]) }}"
+                            class="text-white text-decoration-none">
+                                Name
+                                @if(request('sort') == 'asc')
+                                    ⬆️
+                                @elseif(request('sort') == 'desc')
+                                    ⬇️
+                                @endif
+                            </a>
+                        </th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>College</th>

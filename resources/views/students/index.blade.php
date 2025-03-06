@@ -13,8 +13,9 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <!-- Filter Form -->
+            <!-- Filter & Sort Form -->
             <form method="GET" action="{{ route('students.index') }}" class="row g-2 align-items-center mb-3">
+                <!-- College Filter -->
                 <div class="col-auto">
                     <select name="college_id" class="form-select">
                         <option value="">All Colleges</option>
@@ -25,8 +26,26 @@
                         @endforeach
                     </select>
                 </div>
+
+                <!-- Filter Button -->
                 <div class="col-auto">
                     <button type="submit" class="btn btn-secondary">Filter</button>
+                </div>
+
+                <!-- Sort by Name Button -->
+                <div class="col-auto">
+                    <a href="{{ route('students.index', [
+                            'college_id' => request('college_id'),
+                            'sort' => request('sort') == 'asc' ? 'desc' : 'asc'
+                        ]) }}" 
+                       class="btn btn-primary">
+                        Sort by Name 
+                        @if(request('sort') == 'asc')
+                            🔽
+                        @else
+                            🔼
+                        @endif
+                    </a>
                 </div>
             </form>
 
@@ -34,20 +53,7 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>
-                            <a href="{{ route('students.index', [
-                                    'college_id' => request('college_id'), 
-                                    'sort' => request('sort') == 'asc' ? 'desc' : 'asc'
-                                ]) }}"
-                            class="text-white text-decoration-none">
-                                Name
-                                @if(request('sort') == 'asc')
-                                    ⬆️
-                                @elseif(request('sort') == 'desc')
-                                    ⬇️
-                                @endif
-                            </a>
-                        </th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>College</th>
